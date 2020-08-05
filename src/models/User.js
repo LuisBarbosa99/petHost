@@ -6,6 +6,18 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    username:{
+        type: String,
+        required: true,
+        lowercase: true,
+        unique: true,
+    },
+    userType:{
+        type: String,
+        required: true,
+        lowercase: true,
+        default: 'owner',
+    },
     email:{
         type: String,
         unique: true,
@@ -16,6 +28,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         select: false,
+    },
+    location:{
+        type: String,
     },
     createdAt:{
         type: Date,

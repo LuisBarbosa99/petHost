@@ -1,6 +1,14 @@
 const User = require('../models/User');
 
 module.exports = {
+    async show(request,response){
+        const {id} = request.body;
+
+        const user = await User.findById(id);
+
+        response.status(200).json(user);
+    },
+    
     async store(request, response){
         const { email } = request.body;
 
