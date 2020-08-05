@@ -1,6 +1,14 @@
 const User = require('../models/User');
 
 module.exports = {
+    async show(request,response){
+        const {id} = request.body;
+        
+        const user = await User.findById(id);
+
+        response.status(200).json(user);
+    },
+
     async store(request, response){
         const { email } = request.body;
 
@@ -11,15 +19,14 @@ module.exports = {
             const user = await User.create(request.body);
             user.password = undefined;
 
-            if(!user){
+            if(!user)
                 return response.status(200).send({message: 'OK'});
-            }else{
-                return response.status(201).send({message: 'User Created'});
-            }
+    
+
+            return response.status(201).send({message: 'User Created'});
             
         } catch (error) {
             return response.status(400).send({message: 'User Registration Failed'});
         }
-    },
-
+    }
 }
