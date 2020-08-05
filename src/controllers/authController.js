@@ -22,7 +22,7 @@ module.exports = {
                 return response.status(200).send({message: 'OK'});
     
 
-            return response.status(201).send({message: 'User Created'});
+            return response.status(201).send({message: 'User Created Successfully'});
             
         } catch (error) {
             return response.status(400).send({message: 'User Registration Failed'});

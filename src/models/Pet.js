@@ -11,7 +11,7 @@ const PetSchema = new mongoose.Schema({
     bio:{
         type: String,
     },
-    userId:{
+    ownerUsername:{
         type: String,
         required: true,
     },
