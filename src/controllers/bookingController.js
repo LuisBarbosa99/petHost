@@ -35,7 +35,6 @@ module.exports = {
             if(!booking)
                 return response.status(200).send({message: 'OK'});
     
-
             return response.status(201).send({message: 'Booking Created Successfully'});
         } catch (error) {
             return response.status(400).send({message: 'Booking Registration Failed'});

@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
         lowercase: true,
         unique: true,
     },
-    userType:{
+    type:{
         type: String,
         required: true,
         lowercase: true,
