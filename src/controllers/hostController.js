@@ -1,15 +1,16 @@
 const Host = require('../models/Host');
 const User = require('../models/User');
-const { show } = require('./userController');
 
 module.exports = {
     async index(request,response){
+        const hosts = await Host.find();
 
+        return response.status(200).json(hosts);
     },
     async show(request,response){
-        const {id} = request.body;
+        const {username} = request.params;
 
-        const host = await Host.findById(id);
+        const host = await Host.findOne({username});
 
         response.status(200).json(host);
     },

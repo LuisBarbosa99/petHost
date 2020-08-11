@@ -14,7 +14,8 @@ routes.get('/users', userController.show);
 routes.post('/:ownerUsername/pets', petController.store);
 //Host
 routes.post('/hosts', hostController.store);
-routes.get('/hosts', hostController.show);
+routes.get('/hosts', hostController.index);
+routes.get('/hosts/:username', hostController.show);
 routes.put('/hosts/:username', hostController.update);
 //Booking
 routes.post('/:ownerUsername/bookings', bookingController.store);
