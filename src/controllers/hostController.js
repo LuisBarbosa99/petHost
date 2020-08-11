@@ -9,23 +9,22 @@ module.exports = {
         try {
             const user = await User.findOne({username});
                         
-            if(!user){
-                return response.status(400).json({error: 'User does not exist'});
-            }
+            if(!user) return response.status(400).json({error: 'User does not exist'});
+            
+            const host = Host.findOne({username});
+
+            if(host) return response.status(409).json({error: 'Conflict: Host already exists'});
 
             user.type = 'host';
             user.save();
            
-            console.log(user)
-
-            const host = await Host.create({
+            host = await Host.create({
                 userId: user._id,
                 username,
                 bio,
             });
 
-            if(!host)
-                return response.status(200).json({message: 'OK'});
+            if(!host) return response.status(200).json({message: 'OK'});
 
             return response.status(201).json({message: 'Host Registered Successfully'});
 

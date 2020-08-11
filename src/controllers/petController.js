@@ -1,5 +1,6 @@
 const Pet = require('../models/Pet');
 const User = require('../models/User');
+const crypto = require('crypto');
 
 module.exports = {
     async store(request, response){
@@ -10,9 +11,12 @@ module.exports = {
             const owner = await User.findOne({username: ownerUsername});
 
             if(!owner)
-                return response.status(400).send({error: 'User does not exist'});
+                return response.status(400).json({error: 'User does not exist'});
+            
+            const id  = crypto.randomBytes(4).toString('HEX');
 
             const pet = await Pet.create({
+                id,
                 name,
                 type,
                 bio,
@@ -20,14 +24,14 @@ module.exports = {
             });
 
             if(!pet)
-                return response.status(200).send({message: 'OK'});
+                return response.status(200).json({message: 'OK'});
 
 
-            return response.status(201).send({message: 'Pet Created Successfully'});
+            return response.status(201).json({message: 'Pet Created Successfully', id: id});
 
             
-        } catch (error) {
-            return response.status(400).send({message: 'Pet Registration Failed'});
+        } catch (err) {
+            return response.status(400).json({message: 'Pet Registration Failed', error: err});
         }
     },
 }
