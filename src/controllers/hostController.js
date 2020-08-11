@@ -3,18 +3,20 @@ const User = require('../models/User');
 
 module.exports = {
     async store(request,response){
+        const {username} = request.headers;
+        const {bio} = request.body;
+
         try {
-            const {username} = request.params;
-            const {bio} = request.body;
-
-            const user = await User.findOne(username);
-
+            const user = await User.findOne({username});
+                        
             if(!user){
-                return response.status(400).send({error: 'User does not exist'});
+                return response.status(400).json({error: 'User does not exist'});
             }
 
             user.type = 'host';
             user.save();
+           
+            console.log(user)
 
             const host = await Host.create({
                 userId: user._id,
@@ -23,12 +25,12 @@ module.exports = {
             });
 
             if(!host)
-                return response.status(200).send({message: 'OK'});
+                return response.status(200).json({message: 'OK'});
 
-            return response.status(201).send({message: 'Host Registered Successfully'});
+            return response.status(201).json({message: 'Host Registered Successfully'});
 
-        } catch (error){
-            return response.status(400).send({message: 'Booking Registration Failed'});
+        } catch (err){
+            return response.status(400).json({message: 'Host Registration Failed', error: `${err}`});
 
         }
     }
