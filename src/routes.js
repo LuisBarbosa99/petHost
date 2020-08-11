@@ -7,10 +7,16 @@ const bookingController = require('./controllers/bookingController');
 
 const routes = express.Router();
 
+//User
 routes.post('/users', userController.store);
 routes.get('/users', userController.show);
+//Pet
 routes.post('/:ownerUsername/pets', petController.store);
+//Host
 routes.post('/hosts', hostController.store);
+routes.get('/hosts', hostController.show);
+routes.put('/hosts/:username', hostController.update);
+//Booking
 routes.post('/:ownerUsername/bookings', bookingController.store);
 
 module.exports = routes;
