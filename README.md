@@ -1,10 +1,12 @@
-#PetHost<h1>
+PetHost
+=======
 
 Um projeto de uma API para tornar a vida de donos de pet mais fácil, fornecendo-lhes uma hospedagem para seus melhores amigos, a partir de pessoas que se disponibilizam a cuidar de pets por alguns dias por um preço baixo.
 
 *A project of an API to make life easier for pet owners, providing them an accomodation for their best friends, from people who make themselves available to take care of pets for a few days for a low price.*
 
-##Como usar a API:<h2>
+Como usar a API:
+---------------
 
 1. Criar um usuário('/users')
     
